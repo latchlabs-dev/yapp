@@ -1,0 +1,76 @@
+:root {
+  color-scheme: light dark;
+  font: 13px/1.4 system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+main {
+  padding: 16px;
+}
+
+h1 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.status,
+.tab,
+.hint {
+  overflow-wrap: anywhere;
+}
+
+.status {
+  color: #777;
+}
+
+.status.ok {
+  color: #16833b;
+}
+
+.status.error {
+  color: #bd2c2c;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin: 12px 0 5px;
+}
+
+input,
+button {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input {
+  padding: 8px;
+}
+
+button {
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 8px 10px;
+}
+
+.row {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #8885;
+  margin: 16px 0;
+}
+
+.hint {
+  color: #777;
+  font-size: 11px;
+  margin-bottom: 0;
+}

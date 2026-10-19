@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pi Terminal Browser</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Pi Terminal Browser</h1>
+      <p id="status" class="status">Checking bridge…</p>
+      <label for="token">Pairing token</label>
+      <input id="token" type="password" autocomplete="off" spellcheck="false" />
+      <div class="row">
+        <button id="pair">Pair</button>
+        <button id="forget" class="secondary">Forget</button>
+      </div>
+      <hr />
+      <p id="tab" class="tab">No active tab.</p>
+      <button id="toggle-tab" disabled>Approve this tab</button>
+      <p class="hint">Only approved tabs are visible to Pi. The badge says ON while this tab is approved.</p>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

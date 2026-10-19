@@ -1,0 +1,12 @@
+{
+  "name": "deploy-version",
+  "project": "piproxy",
+  "messages": [
+    {"role": "user", "text": "deploy is failing with an error about a missing version variable in docker compose"},
+    {"role": "assistant", "text": "Checking the compose file..."},
+    {"role": "user", "text": "it says PIPROXY_VERSION is required"}
+  ],
+  "relevant_paths": [
+    {"path": "notes/deploy-runbook.md", "grade": 2}
+  ]
+}

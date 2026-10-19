@@ -1,0 +1,24 @@
+# Only application build inputs enter the backend build context.
+**
+!Dockerfile
+!go.mod
+!go.sum
+!cmd/
+!cmd/**
+!internal/
+!internal/**
+!third_party/
+!third_party/**
+!migrations/
+!migrations/**
+!extensions/
+!extensions/corp-proxy.ts
+**/node_modules
+**/.env
+**/.env.*
+**/*.sa.json
+**/*.pem
+**/*.key
+**/.git
+**/.venv
+**/__pycache__

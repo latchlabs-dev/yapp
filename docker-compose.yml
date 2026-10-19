@@ -1,0 +1,3 @@
+# Portable local example; production configuration belongs to your operations repository.
+include:
+  - path: examples/quickstart/compose.yml

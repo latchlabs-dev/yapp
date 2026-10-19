@@ -1,0 +1,12 @@
+{
+  "name": "extension-tool",
+  "project": "piproxy",
+  "messages": [
+    {"role": "user", "text": "add a new custom tool to the pi extension that agents can call"},
+    {"role": "assistant", "text": "I'll register it via the extension API."},
+    {"role": "user", "text": "what schema format do tool parameters use?"}
+  ],
+  "relevant_paths": [
+    {"path": "notes/pi-extension-api.md", "grade": 2}
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "add-migration",
+  "project": "piproxy",
+  "messages": [
+    {"role": "user", "text": "add a new postgres migration that adds a column to usage_events and backfill it"},
+    {"role": "assistant", "text": "Writing the up and down migrations..."},
+    {"role": "user", "text": "how do we apply migrations here, is it automatic?"}
+  ],
+  "relevant_paths": [
+    {"path": "notes/postgres-conventions.md", "grade": 2},
+    {"path": "projects/piproxy/memory.md", "grade": 1}
+  ]
+}

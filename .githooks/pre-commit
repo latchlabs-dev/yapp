@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Enable with: git config core.hooksPath .githooks
+# Checks staged contents and reports only file paths/fingerprints, never values.
+set -euo pipefail
+exec "${PYTHON:-python3}" scripts/check-staged.py

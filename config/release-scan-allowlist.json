@@ -1,0 +1,27 @@
+[
+  {
+    "path": "internal/auth/auth_test.go",
+    "sha256": "0b2e7931987e85d494e96736ea7145a37dc9291ed1b6387590bba83957337e5c",
+    "reason": "Explicit TEST_ONLY synthetic key for prefix parsing"
+  },
+  {
+    "path": "internal/logging/logging_test.go",
+    "sha256": "0b2e7931987e85d494e96736ea7145a37dc9291ed1b6387590bba83957337e5c",
+    "reason": "Explicit synthetic redaction fixtures including AWS documentation example"
+  },
+  {
+    "path": "internal/logging/logging_test.go",
+    "sha256": "1a5d44a2dca19669d72edf4c4f1c27c4c1ca4b4408fbb17f6ce4ad452d78ddb3",
+    "reason": "Explicit synthetic redaction fixtures including AWS documentation example"
+  },
+  {
+    "path": "internal/testutil/e2e/proxy_e2e_test.go",
+    "sha256": "2ac6faafd163591f765294e22be0e1a6e7b61cc3723237f79d9675facc8573a7",
+    "reason": "Mock upstream token used only by in-process httptest servers"
+  },
+  {
+    "path": "internal/testutil/security/leak_test.go",
+    "sha256": "6522a99c5ac834df7dc1e3368be1d092903a5ad14b0d1a851404d8d6b662ae63",
+    "reason": "Explicit test-key-should-not-leak sentinel"
+  }
+]

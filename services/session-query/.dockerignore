@@ -1,0 +1,13 @@
+**
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!session_query/
+!session_query/**
+**/__pycache__
+**/*.pyc
+**/.env*
+**/secrets
+**/*.sa.json
+**/*.key
+**/*.pem

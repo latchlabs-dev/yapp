@@ -1,0 +1,30 @@
+# Builds private/local-review artifacts only. This workflow never publishes a
+# GitHub release, package, container, or deployment, including on tag pushes.
+name: Release rehearsal
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Candidate version
+        required: true
+        default: rehearsal
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        with:
+          go-version-file: go.mod
+      - run: python3 scripts/check-release.py
+      - name: Build non-distributable rehearsal archives
+        env:
+          CANDIDATE_VERSION: ${{ inputs.version }}
+        run: python3 scripts/package-release.py --rehearsal --version "$CANDIDATE_VERSION" --output dist
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-rehearsal
+          path: dist/
+          retention-days: 7

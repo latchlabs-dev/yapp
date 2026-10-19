@@ -1,0 +1,13 @@
+{
+  "name": "quota-race",
+  "project": "piproxy",
+  "messages": [
+    {"role": "user", "text": "two concurrent requests both passed the spend check and we went over budget. fix the quota race"},
+    {"role": "assistant", "text": "Looking at the quota enforcer..."},
+    {"role": "user", "text": "make sure the reservation is atomic"}
+  ],
+  "relevant_paths": [
+    {"path": "notes/quota-design.md", "grade": 2},
+    {"path": "projects/piproxy/memory.md", "grade": 1}
+  ]
+}

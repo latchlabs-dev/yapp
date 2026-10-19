@@ -1,0 +1,63 @@
+# Binaries
+/bin/
+/proxy
+/admin
+*.exe
+
+# Test artifacts
+coverage.out
+coverage.html
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Service-account keys / registry pull creds (never commit) — see deploy.md
+/secrets/
+*.sa.json
+
+# Local agent task-tracking scratch (not deployed; see deploy.md rsync excludes)
+.pi/
+
+# Local runtime state (may contain auth/session databases)
+/data/
+
+# Browser-automation (Playwright MCP) console/scratch output
+.playwright-mcp/
+
+# Build
+dist/
+*.test
+
+# Node / frontend
+node_modules/
+ui/node_modules/
+ui/dist/
+# /design-sync tooling artifacts — local only, not used by the app build
+.ds-sync/
+ds-bundle/
+.design-sync/
+ui/.ds-css/
+ui/.ds-fonts/
+
+# Private operations and local generated material
+/reports/
+/evals/
+/deploy/
+/docker-compose.prod.yml
+*.tsbuildinfo
+**/.venv/
+**/__pycache__/

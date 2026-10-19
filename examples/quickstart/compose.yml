@@ -1,0 +1,111 @@
+# Local-only evaluation. All published ports bind loopback.
+name: piproxy-quickstart
+x-runtime: &runtime
+  PROXY_POSTGRES_DSN: postgres://proxy:local-demo-password@postgres:5432/proxy?sslmode=disable
+  PROXY_REDIS_ADDRESS: redis:6379
+  PROXY_SECRETS_PROVIDER: env
+  PROXY_AUTH_HASH_PEPPER_REF: local/hash-pepper
+  PROXY_KEY_HASH_PEPPER: local-demo-pepper-change-before-production
+  PROXY_ADMIN_KEY: local-demo-admin-key
+  PROXY_CREDENTIAL_ENCRYPTION_KEY: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+  PROXY_CAPTURE_ENABLED: "false"
+  PROXY_SESSION_ARCHIVE_ENABLED: "false"
+  PROXY_WEB_ENABLED: "false"
+  PROXY_PUBLIC_BASE_URL: http://localhost:18080
+  PROXY_SECRET_PROVIDERS_DEMO_API_KEY: local-demo-upstream-key
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: proxy
+      POSTGRES_PASSWORD: local-demo-password
+      POSTGRES_DB: proxy
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U proxy]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  migrate:
+    image: migrate/migrate:v4.18.3
+    volumes:
+      - ../../migrations:/migrations:ro
+    command: ["-path", "/migrations", "-database", "postgres://proxy:local-demo-password@postgres:5432/proxy?sslmode=disable&x-migrations-table=piproxy_migrations", "up"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+  bootstrap:
+    image: postgres:17-alpine
+    environment:
+      PGPASSWORD: local-demo-password
+    volumes:
+      - ./bootstrap.sql:/bootstrap.sql:ro
+    entrypoint: [psql]
+    command: [-h, postgres, -U, proxy, -d, proxy, -v, ON_ERROR_STOP=1, -f, /bootstrap.sql]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+  mock:
+    image: piproxy-quickstart-ui:local
+    volumes:
+      - ./mock-nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1:8080/healthz]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  proxy:
+    image: piproxy-quickstart:local
+    environment: *runtime
+    ports:
+      - 127.0.0.1:18080:8080
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1:8080/readyz]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+      mock:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  admin:
+    image: piproxy-quickstart:local
+    entrypoint: [/usr/local/bin/admin]
+    environment: *runtime
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1:8081/healthz]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+      mock:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  ui:
+    image: piproxy-quickstart-ui:local
+    ports:
+      - 127.0.0.1:13333:80
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1/]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    depends_on:
+      admin:
+        condition: service_healthy
+volumes:
+  pgdata:

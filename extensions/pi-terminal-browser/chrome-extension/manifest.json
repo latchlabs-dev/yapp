@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Pi Terminal Browser",
+  "version": "0.1.0",
+  "description": "Explicitly pair Pi with approved browser terminal tabs.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "alarms",
+    "debugger",
+    "scripting",
+    "storage",
+    "tabs",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Pi Terminal Browser",
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,13 @@
+[project]
+name = "piproxy-session-query"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+  "duckdb==1.4.5",
+  "google-cloud-storage>=3.0,<4",
+  "psycopg[binary]>=3.2,<4",
+]
+
+[tool.uv]
+package = false
+exclude-newer = "7 days"

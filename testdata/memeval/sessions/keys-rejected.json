@@ -1,0 +1,13 @@
+{
+  "name": "keys-rejected",
+  "project": "piproxy",
+  "messages": [
+    {"role": "user", "text": "after redeploying, every API key is rejected with 401 even though they worked before"},
+    {"role": "assistant", "text": "That smells like a hashing mismatch."},
+    {"role": "user", "text": "what config has to match between nodes?"}
+  ],
+  "relevant_paths": [
+    {"path": "notes/deploy-runbook.md", "grade": 2},
+    {"path": "notes/onboarding.md", "grade": 1}
+  ]
+}
