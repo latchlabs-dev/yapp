@@ -1,7 +1,7 @@
 # Build the Tailscale-only web portal (Vite/React) and serve it via nginx.
 # The build stage runs on the native build arch (output is just static JS);
 # only the nginx runtime below is resolved per target arch.
-FROM --platform=$BUILDPLATFORM node:22-alpine AS build
+FROM --platform=$BUILDPLATFORM node:22.23.4-alpine AS build
 WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@10.23.0 --activate
 
